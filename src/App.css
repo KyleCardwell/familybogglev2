@@ -36,3 +36,49 @@
     transform: rotate(360deg);
   }
 }
+
+.gameBoard {
+  max-width: 800px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin-bottom: 20px;
+  aspect-ratio: 1/1;
+}
+
+.gameBoardBox {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gameDice {
+  box-sizing: border-box;
+  font-size: 2.5em;
+  margin: 0;
+  padding: 5px;
+}
+
+.fiveby5 {
+  width: 20%;
+}
+
+.fourby4 {
+  width: 25%;
+}
+
+.board-buttons {
+  display: flex;
+  justify-content: space-evenly;
+  min-width: 300px;
+}
+
+.timer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  font-size: xx-large;
+  min-width: 300px;
+  margin-bottom: 20px;
+}
