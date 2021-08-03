@@ -1,16 +1,16 @@
-import { SET_BOARD_DICE, TIMER_START, SET_LETTERS_LIST } from "../actions";
+import { SET_BOARD_DICE, SET_LETTERS_LIST, SCRAMBLE_LETTERS, START_COUNT, SET_TIME_REMAINING, RESET_TIME, SET_TIME_IS_UP } from "../actions";
 import { dice4by4, dice5by5 } from '../components/dicedata'
 
-const initialTime = 120;
+const initialTime = 180;
 
 export const initialState = {
 
     lettersList: [],
     remaining: initialTime,
     timeIsUp: false,
+    isCounting: false,
     boardDice: dice5by5,
     boardDiceName: "5 x 5",
-    isCounting: false,
 
 }
 
@@ -22,6 +22,7 @@ const lettersListScramble = (array) => {
       newArray[i] = newArray[j]
       newArray[j] = temp
     }
+
     return newArray;
 }
 
@@ -33,38 +34,74 @@ const chooseLetters = (diceArray) => {
     })
 
     const useLetters = lettersListScramble(diceLetters);
+    const useLetters2 = lettersListScramble(useLetters)
 
-    return useLetters;
+    return useLetters2;
 }
 
 
 export const reducer = (state = initialState, action) => {
     switch(action.type) {
-        case (TIMER_START):
-            return({
-                ...state,
-                isCounting: true
-            })
-    case (SET_BOARD_DICE):
-        if (state.boardDice === dice4by4) {
+    
+        case (SET_BOARD_DICE):
+            if (state.boardDiceName === "4 x 4") {
+
+                return ({
+                    ...state,
+                    boardDice: dice5by5,
+                    boardDiceName: "5 x 5"
+                })
+            } else
             return ({
                 ...state,
-                boardDice: dice5by5
-            }
-            )
-        } else
-        return ({
-            ...state,
-            boardDice: dice4by4
-        })
-    case (SET_LETTERS_LIST):
+                boardDice: dice4by4,
+                boardDiceName: "4 x 4"
+            })
+        case (SET_LETTERS_LIST):
 
-        const useLetters = chooseLetters(action.payload)
+            const useLetters = chooseLetters(action.payload)
+            
+            return ({
+                ...state,
+                lettersList: useLetters
+            })
+
+        case (SCRAMBLE_LETTERS):
+            
+            const rescrambleLetters = chooseLetters(action.payload)
+            
+            return ({
+                ...state,
+                lettersList: rescrambleLetters
+            })
+
+        case (START_COUNT):
+
+            return ({
+                ...state,
+                isCounting: true,
+                timeIsUp: false
+            })
+        case (SET_TIME_REMAINING):
+            return ({
+                ...state,
+                remaining: action.payload
+            })
         
-        return ({
-            ...state,
-            lettersList: useLetters
-        })
+        case (RESET_TIME):
+            return ({
+                ...state,
+                remaining: initialTime,
+                isCounting: false,
+                timeIsUp: false
+            })
+        case (SET_TIME_IS_UP):
+            return ({
+                ...state,
+                timeIsUp: true,
+                isCounting: false
+            })
+            
         default:
             return state;
     }

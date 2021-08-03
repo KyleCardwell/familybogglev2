@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 function Dice(props) {
@@ -11,8 +11,20 @@ function Dice(props) {
         }
     }
 
+    const timeIsUpClass = () => {
+        if(props.timeIsUp === false) {
+            return ""
+        } else {
+            return "timeDone"
+        }
+    }
+
         return (
-            <h2 className={`gameDice ${sizeClass()}`}>{props.letter}</h2>
+            <div className={`diceCube ${sizeClass()} ${timeIsUpClass()}`}>
+
+                <h2 className="gameDice">{props.letter}</h2>
+
+            </div>
         )
 
 }
@@ -21,6 +33,7 @@ const mapStateToProps = state => {
     return ({
 
         boardDiceName: state.boardDiceName,
+        timeIsUp: state.timeIsUp
 
     })
 

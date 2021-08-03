@@ -1,29 +1,56 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button } from '@material-ui/core'
+import { connect } from 'react-redux';
+import { resetTime, startCount, setTimeRemaining, setTimeIsUp } from '../actions'
 
-export default function Timer() {
+function Timer(props) {
+
+    useEffect(() => {
+        countDown()
+    },[props.isCounting, props.seconds])
+
+    const countDown = () => {
+
+        if(props.seconds > 0) {
+
+            if (props.isCounting === true) {
+    
+                setTimeout(() => {
+                    const timeLeft = props.seconds
+                    const timeMinus = timeLeft - 1;
+                    props.setTimeRemaining(timeMinus)
+    
+                }, 1000)
+                    
+            }
+
+        } else {
+
+            props.setTimeIsUp()
+        }
+
+    }
 
     
     return (
         <div className="timer">
 
 
-            <h3>{this.state.seconds}</h3>
-            {/* <h3>{this.props.remaining}</h3> */}
+            <h3>{props.seconds > 0 ? props.seconds : "TIME IS UP!"}</h3>
             
             <div className="board-buttons">
 
                 <Button
                     variant="contained"
-                    onClick={this.startCount}
+                    onClick={() => props.startCount()}
                     color="secondary"
-                >Start</Button>
+                >Start Timer</Button>
 
                 <Button
                     variant="contained"
-                    onClick={this.resetTime}
+                    onClick={() => props.resetTime()}
                     color="secondary"
-                >Reset</Button>
+                >Reset Timer</Button>
 
             </div>
 
@@ -39,3 +66,11 @@ export default function Timer() {
     )
 }
 
+const mapStateToProps = state => {
+    return ({
+        isCounting: state.isCounting,
+        seconds: state.remaining
+    })
+}
+
+export default connect(mapStateToProps, {resetTime, startCount, setTimeRemaining, setTimeIsUp})(Timer)
