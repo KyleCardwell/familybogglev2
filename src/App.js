@@ -1,9 +1,10 @@
 import './App.css';
 import React, { useEffect } from 'react'
 import GameBoard from './components/GameBoard'
-import { Grid, Button } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
 import { connect } from 'react-redux';
 import { setLettersList } from './actions';
+import Timer from './components/Timer';
 
 const App = (props) => {
 
@@ -18,8 +19,7 @@ const App = (props) => {
     <div className="App">
 
       <Grid className="App-header">
-
-        Hello
+        <Timer />
         <GameBoard />
 
       </Grid>
