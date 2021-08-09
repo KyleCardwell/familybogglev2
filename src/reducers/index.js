@@ -1,16 +1,18 @@
-import { SET_BOARD_DICE, SET_LETTERS_LIST, SCRAMBLE_LETTERS, START_COUNT, SET_TIME_REMAINING, RESET_TIME, SET_TIME_IS_UP } from "../actions";
+import { SET_BOARD_DICE, SET_LETTERS_LIST, SCRAMBLE_LETTERS, START_COUNT, SET_TIME_REMAINING, RESET_TIME, SET_TIME_IS_UP, TIMER_COUNT_DOWN, TIMER_COUNT_UP, SET_TIME_BTN } from "../actions";
 import { dice4by4, dice5by5 } from '../components/dicedata'
 
-const initialTime = 180;
+
 
 export const initialState = {
 
     lettersList: [],
-    remaining: initialTime,
+    initialTime: 180,
+    remaining: 180,
     timeIsUp: false,
     isCounting: false,
     boardDice: dice5by5,
     boardDiceName: "5 x 5",
+    setTime: false,
 
 }
 
@@ -91,9 +93,9 @@ export const reducer = (state = initialState, action) => {
         case (RESET_TIME):
             return ({
                 ...state,
-                remaining: initialTime,
                 isCounting: false,
-                timeIsUp: false
+                timeIsUp: false,
+                remaining: state.initialTime,
             })
         case (SET_TIME_IS_UP):
             return ({
@@ -101,7 +103,25 @@ export const reducer = (state = initialState, action) => {
                 timeIsUp: true,
                 isCounting: false
             })
-            
+        case (TIMER_COUNT_UP):
+            const countUp = state.remaining + 10
+            return ({
+                ...state,
+                remaining: countUp,
+                initialTime: countUp
+            })
+        case (TIMER_COUNT_DOWN):
+            const countDown = state.remaining - 10
+            return ({
+                ...state,
+                remaining: countDown,
+                initialTime: countDown
+            })
+        case (SET_TIME_BTN):
+            return ({
+                ...state,
+                setTime: !state.setTime
+            })            
         default:
             return state;
     }
