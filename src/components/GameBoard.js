@@ -2,7 +2,7 @@ import React, { useEffect }from 'react';
 import { connect } from 'react-redux';
 import Dice from './Dice'
 import { scrambleLetters, setLettersList, setBoardDice } from '../actions'
-import { Button } from '@material-ui/core'
+import Button from '@mui/material/Button';
 
 let guid = () => {
     let s4 = () => {

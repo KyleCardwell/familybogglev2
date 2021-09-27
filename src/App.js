@@ -1,10 +1,11 @@
 import './App.css';
 import React, { useEffect } from 'react'
 import GameBoard from './components/GameBoard'
-import { Grid } from '@material-ui/core'
+import Grid from '@mui/material/Grid';
 import { connect } from 'react-redux';
 import { setLettersList } from './actions';
 import Timer from './components/Timer';
+import NewGameModal from './components/NewGameModal';
 
 const App = (props) => {
 
@@ -19,10 +20,14 @@ const App = (props) => {
     <div className="App">
 
       <Grid className="App-header">
-        <Timer />
-        <GameBoard />
+        
+        {props.showNewGameModal ? <NewGameModal /> : <div>
+          <Timer /> <GameBoard />
+          </div>
+        }
 
       </Grid>
+
     </div>
   );
 }
@@ -30,7 +35,8 @@ const App = (props) => {
 const mapStateToProps = state => {
   return({
     lettersList: state.lettersList,
-    boardDice: state.boardDice
+    boardDice: state.boardDice,
+    showNewGameModal: state.showNewGameModal
 
   })
 }

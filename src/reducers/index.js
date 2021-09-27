@@ -1,4 +1,4 @@
-import { SET_BOARD_DICE, SET_LETTERS_LIST, SCRAMBLE_LETTERS, START_COUNT, SET_TIME_REMAINING, RESET_TIME, SET_TIME_IS_UP, TIMER_COUNT_DOWN, TIMER_COUNT_UP, SET_TIME_BTN } from "../actions";
+import { SET_BOARD_DICE, SET_LETTERS_LIST, SCRAMBLE_LETTERS, START_COUNT, SET_TIME_REMAINING, RESET_TIME, SET_TIME_IS_UP, TIMER_COUNT_DOWN, TIMER_COUNT_UP, SET_TIME_BTN, START_GAME, SET_SHOW_NEW_GAME_MODAL, SET_INITIAL_TIME, SET_IS_COUNTING } from "../actions";
 import { dice4by4, dice5by5 } from '../components/dicedata'
 
 
@@ -13,6 +13,8 @@ export const initialState = {
     boardDice: dice5by5,
     boardDiceName: "5 x 5",
     setTime: false,
+    showNewGameModal: true,
+    gameIsStarting: false
 
 }
 
@@ -87,9 +89,13 @@ export const reducer = (state = initialState, action) => {
         case (SET_TIME_REMAINING):
             return ({
                 ...state,
-                remaining: action.payload
+                remaining: action.payload,
             })
-        
+        case (SET_INITIAL_TIME):
+            return({
+                ...state,
+                initialTime: action.payload
+            })
         case (RESET_TIME):
             return ({
                 ...state,
@@ -121,7 +127,32 @@ export const reducer = (state = initialState, action) => {
             return ({
                 ...state,
                 setTime: !state.setTime
-            })            
+            })
+        case (START_GAME):
+            return({
+                ...state,
+                gameIsStarting: true
+            })   
+        case (SET_SHOW_NEW_GAME_MODAL):
+            return({
+                ...state,
+                showNewGameModal: !state.showNewGameModal
+            })
+        case (SET_IS_COUNTING):
+
+            if(action.payload === undefined){
+                
+                return({
+                    ...state,
+                    isCounting: !state.isCounting
+                })
+
+            } else {
+                return({
+                    ...state,
+                    isCounting: action.payload
+                })
+            }
         default:
             return state;
     }
