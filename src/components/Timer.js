@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Button from '@mui/material/Button'
 import { connect } from 'react-redux';
-import { resetTime, startCount, setTimeRemaining, setTimeIsUp, timerCountDown, timerCountUp, setIsCounting } from '../actions'
+import { resetTime, startCount, setTimeRemaining, setTimeIsUp, timerCountDown, timerCountUp, setIsCounting, setShowNewGameModal, startGame } from '../actions'
 import TimeSlider from './TimeSlider';
 
 function Timer(props) {
@@ -67,6 +67,16 @@ function Timer(props) {
             
             <div className="board-buttons">
 
+                {!props.timeIsUp ? "" : <Button
+                    variant="contained"
+                    onClick={() => {
+                        props.startGame()
+                        // props.setTimeIsUp()
+                        props.setShowNewGameModal()
+                    }
+                    }
+                >New Game</Button>}
+
                 {counters === false ? <Button
                     variant="contained"
                     onClick={() => props.startCount()}
@@ -100,8 +110,10 @@ const mapStateToProps = state => {
     return ({
         isCounting: state.isCounting,
         seconds: state.remaining,
-        setTime: state.setTime
+        setTime: state.setTime,
+        timeIsUp: state.timeIsUp,
+        gameIsStarting: state.gameIsStarting
     })
 }
 
-export default connect(mapStateToProps, {resetTime, startCount, setTimeRemaining, setTimeIsUp, timerCountUp, timerCountDown, setIsCounting})(Timer)
+export default connect(mapStateToProps, {resetTime, startCount, setTimeRemaining, setTimeIsUp, timerCountUp, timerCountDown, setIsCounting, setShowNewGameModal, startGame})(Timer)

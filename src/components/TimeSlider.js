@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -75,7 +75,7 @@ function TimeSlider(props) {
 
 const mapStateToProps = state => {
   return {
-    initialTime: state.initialTime
+    initialTime: state.initialTime,
   }
 }
 

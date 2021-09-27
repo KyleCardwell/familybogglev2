@@ -64,3 +64,5 @@ export const setInitialTime = (newTime) => {
 export const setIsCounting = (value) => {
     return ({type: SET_IS_COUNTING, payload: value})
 }
+
+

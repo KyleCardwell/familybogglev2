@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Button, Card, CardHeader, Container } from '@mui/material'
-import { startGame, setShowNewGameModal, startCount } from '../actions';
+import { startGame, setShowNewGameModal, startCount, setInitialTime } from '../actions';
 import ToggleSize from './ToggleSize';
 import TimeSlider from './TimeSlider';
 
@@ -21,6 +21,7 @@ const NewGameModal = (props) => {
                 }, 1000)
 
             } else {
+                props.setInitialTime(props.InitialTime)
                 props.setShowNewGameModal()
                 props.startCount()
 
@@ -54,7 +55,9 @@ const NewGameModal = (props) => {
                             </div>
 
                             <div>
-                                <Button color="primary" variant="contained" onClick={() => props.startGame()}>Start Now</Button>
+                                <Button color="primary" variant="contained" onClick={() => {
+                                    props.startGame()
+                                }}>Start Now</Button>
                                 
                             </div>
                         </div>
@@ -79,8 +82,9 @@ const mapStateToProps = (state) => {
     return({
         showNewGameModal: state.showNewGameModal,
         gameIsStarting: state.gameIsStarting,
+        initialTime: state.initialTime
 
     })
 }
 
-export default connect(mapStateToProps, {startGame, setShowNewGameModal, startCount})(NewGameModal);
+export default connect(mapStateToProps, {startGame, setShowNewGameModal, startCount, setInitialTime})(NewGameModal);

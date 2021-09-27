@@ -131,7 +131,7 @@ export const reducer = (state = initialState, action) => {
         case (START_GAME):
             return({
                 ...state,
-                gameIsStarting: true
+                gameIsStarting: !state.gameIsStarting
             })   
         case (SET_SHOW_NEW_GAME_MODAL):
             return({
