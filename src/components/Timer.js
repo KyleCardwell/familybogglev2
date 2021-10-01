@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Button } from '@material-ui/core'
+import Button from '@mui/material/Button'
 import { connect } from 'react-redux';
-import { resetTime, startCount, setTimeRemaining, setTimeIsUp, timerCountDown, timerCountUp } from '../actions'
+import { resetTime, startCount, setTimeRemaining, setTimeIsUp, timerCountDown, timerCountUp, setIsCounting, setShowNewGameModal, startGame } from '../actions'
+import TimeSlider from './TimeSlider';
 
 function Timer(props) {
 
     const [ counters, showCounters ] = useState(false)
+
+    let myCounter;
 
     useEffect(() => {
         countDown()
@@ -17,7 +20,7 @@ function Timer(props) {
 
             if (props.isCounting === true) {
     
-                setTimeout(() => {
+                myCounter = setTimeout(() => {
                     const timeLeft = props.seconds
                     const timeMinus = timeLeft - 1;
                     props.setTimeRemaining(timeMinus)
@@ -34,6 +37,9 @@ function Timer(props) {
     }
 
     const setTimeToggle = () => {
+
+        clearTimeout(myCounter)
+        props.setIsCounting(false)
         showCounters(!counters)
   
     }
@@ -44,28 +50,38 @@ function Timer(props) {
 
             <div className="board-buttons">
 
-                {counters === true ? <Button className="counterButton"
+                {/* {counters === true ? <Button className="counterButton"
                     variant="contained"
                     onClick={() => props.timerCountDown()}
                     color="secondary"
-                >Count Down</Button> : ""}
+                >Count Down</Button> : ""} */}
 
                 <h3>{props.seconds > 0 ? props.seconds : "TIME IS UP!"}</h3>
                 
-                {counters === true ? <Button className="counterButton"
+                {/* {counters === true ? <Button className="counterButton"
                     variant="contained"
                     onClick={() => props.timerCountUp()}
                     color="secondary"
-                >Count Up</Button> : ""}
+                >Count Up</Button> : ""} */}
             </div>
             
             <div className="board-buttons">
+
+                {!props.timeIsUp ? "" : <Button
+                    variant="contained"
+                    onClick={() => {
+                        props.startGame()
+                        // props.setTimeIsUp()
+                        props.setShowNewGameModal()
+                    }
+                    }
+                >New Game</Button>}
 
                 {counters === false ? <Button
                     variant="contained"
                     onClick={() => props.startCount()}
                     color="secondary"
-                >Start Timer</Button> : ""}
+                >Start Timer</Button> : <TimeSlider />}
 
                 <Button
                     variant="contained"
@@ -75,7 +91,11 @@ function Timer(props) {
 
                 {counters === false? <Button
                     variant="contained"
-                    onClick={() => props.resetTime()}
+                    onClick={() => {
+                        clearTimeout(myCounter)
+                        props.resetTime()}
+                    }
+                    
                     color="secondary"
                 >Reset Timer</Button> : ""}
 
@@ -90,8 +110,10 @@ const mapStateToProps = state => {
     return ({
         isCounting: state.isCounting,
         seconds: state.remaining,
-        setTime: state.setTime
+        setTime: state.setTime,
+        timeIsUp: state.timeIsUp,
+        gameIsStarting: state.gameIsStarting
     })
 }
 
-export default connect(mapStateToProps, {resetTime, startCount, setTimeRemaining, setTimeIsUp, timerCountUp, timerCountDown})(Timer)
+export default connect(mapStateToProps, {resetTime, startCount, setTimeRemaining, setTimeIsUp, timerCountUp, timerCountDown, setIsCounting, setShowNewGameModal, startGame})(Timer)
