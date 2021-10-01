@@ -92,10 +92,18 @@ export const reducer = (state = initialState, action) => {
                 remaining: action.payload,
             })
         case (SET_INITIAL_TIME):
-            return({
-                ...state,
-                initialTime: action.payload
-            })
+
+            if(action.payload === undefined) {
+                return {
+                    ...state
+                }
+            } else {
+                
+                return({
+                    ...state,
+                    initialTime: action.payload
+                })
+            }
         case (RESET_TIME):
             return ({
                 ...state,
