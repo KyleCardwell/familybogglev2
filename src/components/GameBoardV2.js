@@ -1,6 +1,6 @@
 import React, { useEffect }from 'react';
 import { connect } from 'react-redux';
-import Dice from './Dice'
+import DiceV2 from './DiceV2';
 import { scrambleLetters, setLettersList, setBoardDice } from '../actions'
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -15,27 +15,37 @@ let guid = () => {
     return s4() + s4() + s4() + s4() + s4()+ s4()+ s4();
 }
 
-const GameBoardV2 = (props) => {
+const GameBoard = (props) => {
 
     useEffect(() => {
         props.setLettersList(props.boardDice)
       },[props.boardDice])
-    
+      
+    const sizeClass = () => {
+        if(props.boardDiceName === "5 x 5"){
+        return "grid5"
+        } else {
+        return "grid4"
+        }
+    }
 
     return (
-        <Card>
+        <div className="gameboardLarge">
 
-            <div className="gameBoard">
-                    {props.lettersList.map(letter => {
-                        return (
-                            <Dice 
-                                key={guid()}
-                                letter={letter}
-                            />
-                        )
-                    })}
-            </div>
+            <section className="squareContainer">
 
+                <div className={`${sizeClass()}`}>
+                        {props.lettersList.map(letter => {
+                            return (
+                                <DiceV2 
+                                    key={guid()}
+                                    letter={letter}
+                                />
+                            )
+                        })}
+                </div>
+
+            </section>
             <div className="board-buttons">
 
                 <Button 
@@ -50,8 +60,7 @@ const GameBoardV2 = (props) => {
                     onClick={() => props.scrambleLetters(props.boardDice)}
                 >Scramble Dice</Button>
             </div>
-
-        </Card>
+        </div>
 
     )
 }
@@ -67,4 +76,4 @@ const mapStateToProps = state => {
 
 };
 
-export default connect(mapStateToProps, {scrambleLetters, setLettersList, setBoardDice})(GameBoardV2);
+export default connect(mapStateToProps, {scrambleLetters, setLettersList, setBoardDice})(GameBoard);

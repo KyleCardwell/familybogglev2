@@ -2,16 +2,6 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
 
 .App-header {
   background-color: #282c34;
@@ -24,26 +14,18 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
-}
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* .gameContainer {
+  width: 100%;
 }
 
 .gameBoard {
-  max-width: 600px;
+  max-width: fit-content;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
   margin-bottom: 20px;
-  aspect-ratio: 1/1;
+  aspect-ratio: 1;
 }
 
 .gameBoardBox {
@@ -51,55 +33,86 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  aspect-ratio: 1/1;
-}
-
-.gameDice {
-  /* box-sizing: border-box; */
-  /* font-size: 6em; */
-  margin: 0;
-  /* padding: 5px; */
-  aspect-ratio: 1/1;
+  aspect-ratio: 1;
 }
 
 .diceCube {
   box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   border-radius: 20%;
   background-color: aliceblue;
   border: #282c34 solid 10px;
   color: #282c34;
-  aspect-ratio: 1/1;
+}
+
+
+.diceLetter {
+  width: 100%;
+  height: 100%;
+} */
+
+.gameboardLarge {
+  /* background-color: darkcyan; */
+  min-width: 600px;
+}
+
+.squareContainer {
+  /* border: 3px solid greenyellow; */
+  height: 0;
+  width: 100%;
+  padding-bottom: 100%;
+  position: relative;
+}
+
+.grid4 {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(25%, 1fr));
+  /* grid-gap: 10px; */
+  font-size: 1.75em;
+}
+
+.grid5 {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(20%, 1fr));
+  /* grid-gap: 10px; */
+  font-size: 1.25em;
+}
+
+.square {
+  position: relative;
+  background-color: aliceblue;
+  color: #282c34;
+  /* box-sizing: border-box; */
+  border-radius: 20%;
+  border: #282c34 solid 10px;
+}
+
+.square::before {
+  content: '';
+  display: block;
+  padding-top: 100%;
+}
+
+.square .content {
+  position: absolute;
+  top: 0; left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .timeDone {
   border: red solid 10px;
 }
 
-/* .whiteDice{ */
-  /* margin: 8px; */
-  /* aspect-ratio: 1/1; */
-/* } */
-
-.fiveby5 {
-  width: 20%;
-  aspect-ratio: 1/1;
-  font-size: 1.5em;
-}
-
-.fourby4 {
-  width: 25%;
-  aspect-ratio: 1/1;
-  font-size: 1.75em;
-}
-
 .board-buttons {
   display: flex;
   justify-content: space-evenly;
-  min-width: 300px;
-  align-items: center
+  flex-wrap: wrap;
+  min-width: 400px;
+  align-items: center;
+  margin-top: 20px;
 }
 
 .timer {
@@ -107,7 +120,7 @@
   flex-direction: column;
   justify-content: space-evenly;
   font-size: xx-large;
-  min-width: 500px;
+  /* min-width: 500px; */
   margin-bottom: 20px;
 }
 
@@ -117,7 +130,7 @@
 
 .newGameModal {
   background: white;
-  width: 20%;
+  /* min-width: 20%; */
   position: absolute;
   top: 50%;
   left: 50%;
@@ -125,10 +138,11 @@
   padding-bottom: 20px;
 }
 
-.newGameModal > header {
+.MuiCardHeader-root {
   height: 50px;
   background-color: blueviolet;
   margin-top: 0;
+  color: white;
 }
 
 .modalControls {
@@ -139,4 +153,28 @@
 
 .modalControls > div {
   margin: 10px;
+}
+
+@media (max-width: 700px) {
+
+  .gameboardLarge {
+    min-width: 500px;
+  }
+  
+}
+
+@media (max-width: 520px) {
+
+  .gameboardLarge {
+    min-width: 400px;
+  }
+  
+}
+
+@media (max-width: 420px) {
+
+  .gameboardLarge {
+    min-width: 330px;
+  }
+  
 }

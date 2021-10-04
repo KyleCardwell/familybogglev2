@@ -50,32 +50,20 @@ function Timer(props) {
 
             <div className="board-buttons">
 
-                {/* {counters === true ? <Button className="counterButton"
-                    variant="contained"
-                    onClick={() => props.timerCountDown()}
-                    color="secondary"
-                >Count Down</Button> : ""} */}
-
-                <h3>{props.seconds > 0 ? props.seconds : "TIME IS UP!"}</h3>
-                
-                {/* {counters === true ? <Button className="counterButton"
-                    variant="contained"
-                    onClick={() => props.timerCountUp()}
-                    color="secondary"
-                >Count Up</Button> : ""} */}
-            </div>
-            
-            <div className="board-buttons">
-
                 {!props.timeIsUp ? "" : <Button
                     variant="contained"
                     onClick={() => {
                         props.startGame()
-                        // props.setTimeIsUp()
                         props.setShowNewGameModal()
                     }
                     }
                 >New Game</Button>}
+                <h3>{props.seconds > 0 ? props.seconds : "TIME IS UP!"}</h3>
+                
+            </div>
+            
+            <div className="board-buttons">
+
 
                 {counters === false ? <Button
                     variant="contained"
