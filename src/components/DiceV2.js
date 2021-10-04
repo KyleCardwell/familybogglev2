@@ -20,9 +20,9 @@ function Dice(props) {
     }
 
         return (
-            <div className={`diceCube ${sizeClass()} ${timeIsUpClass()}`}>
+            <div className={`square ${timeIsUpClass()}`}>
 
-                <h2 className="diceLetter">{props.letter}</h2>
+                <div className="content">{props.letter}</div>
 
             </div>
         )
