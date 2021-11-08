@@ -54,6 +54,7 @@ function TimeSlider(props) {
         </Grid>
         <Grid item>
           <Input
+          // Math.floor(props.seconds/60)}:${props.seconds % 60 > 9 ? props.seconds % 60 : "0" + props.seconds % 60
             value={value}
             size="small"
             onChange={handleInputChange}

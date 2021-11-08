@@ -58,7 +58,7 @@ function Timer(props) {
                     }
                     }
                 >New Game</Button>}
-                <h3>{props.seconds > 0 ? props.seconds : "TIME IS UP!"}</h3>
+                <h3>{props.seconds > 0 ? `${Math.floor(props.seconds/60)}:${props.seconds % 60 > 9 ? props.seconds % 60 : "0" + props.seconds % 60}` : "TIME IS UP!"}</h3>
                 
             </div>
             
