@@ -23,12 +23,13 @@ const App = (props) => {
       <Grid className="App-header">
         
         {props.showNewGameModal ? <NewGameModal />
-        : props.showPauseGameModal ? <PauseGameModal />
+        // : props.showPauseGameModal ? <PauseGameModal />
         : <div>
             <Timer />
             <GameBoardV2 />
           </div>
         }
+        {props.showPauseGameModal ? <PauseGameModal /> : "" }
 
       </Grid>
 

@@ -100,6 +100,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 1.6em;
+}
+
+.square .content-hide {
+  color: #F0F8FF;
 }
 
 .timeDone {
@@ -136,6 +141,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   padding-bottom: 20px;
+  box-shadow: 0 10px 10px rgb(0 0 0 / 0.2);
 }
 
 .MuiCardHeader-root {
@@ -160,6 +166,10 @@
   .gameboardLarge {
     min-width: 500px;
   }
+
+  .newGameModal {
+    min-width: 500px
+  }
   
 }
 
@@ -168,6 +178,10 @@
   .gameboardLarge {
     min-width: 400px;
   }
+
+  .newGameModal {
+    min-width: 400px
+  }
   
 }
 
@@ -175,6 +189,10 @@
 
   .gameboardLarge {
     min-width: 330px;
+  }
+
+  .newGameModal {
+    min-width: 330px
   }
   
 }

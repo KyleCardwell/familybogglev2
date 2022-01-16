@@ -19,8 +19,18 @@ function Dice(props) {
         }
     }
 
+    const pausedGameClass = () => {
+        if (props.showPauseGameModal === true){
+
+            return "content-hide"
+        } else {
+            return ""
+        }
+        
+    }
+
         return (
-            <div className={`diceCube ${sizeClass()} ${timeIsUpClass()}`}>
+            <div className={`diceCube ${sizeClass()} ${timeIsUpClass()} ${pausedGameClass()}`}>
 
                 <h2 className="diceLetter">{props.letter}</h2>
 
@@ -33,7 +43,8 @@ const mapStateToProps = state => {
     return ({
 
         boardDiceName: state.boardDiceName,
-        timeIsUp: state.timeIsUp
+        timeIsUp: state.timeIsUp,
+        showPauseGameModal: state.showPauseGameModal
 
     })
 

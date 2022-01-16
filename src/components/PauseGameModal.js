@@ -21,9 +21,7 @@ const PauseGameModal = (props) => {
         <Container>
           {
             <div className="modalControls">
-              <div>
-                <ToggleSize />
-              </div>
+
               <div>
                 <TimeSlider />
               </div>
@@ -44,7 +42,7 @@ const PauseGameModal = (props) => {
                   variant="contained"
                   onClick={() => {
                     props.setShowPauseGameModal();
-                    // props.startGame()
+
                   }}
                 >
                   Resume Game

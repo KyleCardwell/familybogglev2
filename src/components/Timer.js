@@ -66,7 +66,7 @@ function Timer(props) {
           variant="contained"
           onClick={() => {
             props.setShowPauseGameModal();
-            setTimeToggle();
+            // setTimeToggle();
           }}
           color="secondary"
         >
