@@ -48,20 +48,20 @@ const chooseLetters = (diceArray) => {
 export const reducer = (state = initialState, action) => {
     switch(action.type) {
     
-        case (SET_BOARD_DICE):
-            if (state.boardDiceName === "4 x 4") {
+        // case (SET_BOARD_DICE):
+        //     if (state.boardDiceName === "4 x 4") {
 
-                return ({
-                    ...state,
-                    boardDice: dice5by5,
-                    boardDiceName: "5 x 5"
-                })
-            } else
-            return ({
-                ...state,
-                boardDice: dice4by4,
-                boardDiceName: "4 x 4"
-            })
+        //         return ({
+        //             ...state,
+        //             boardDice: dice5by5,
+        //             boardDiceName: "5 x 5"
+        //         })
+        //     } else
+        //     return ({
+        //         ...state,
+        //         boardDice: dice4by4,
+        //         boardDiceName: "4 x 4"
+        //     })
 
         case(SET_4X4):
             return({
@@ -165,7 +165,6 @@ export const reducer = (state = initialState, action) => {
             })
 
         case (SET_SHOW_PAUSE_GAME_MODAL):
-            console.log("hello now")
             return({
                 ...state,
                 showPauseGameModal: !state.showPauseGameModal,

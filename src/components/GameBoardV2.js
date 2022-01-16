@@ -1,7 +1,7 @@
 import React, { useEffect }from 'react';
 import { connect } from 'react-redux';
 import DiceV2 from './DiceV2';
-import { scrambleLetters, setLettersList, setBoardDice } from '../actions'
+import { scrambleLetters, setLettersList, setBoardDice, set4x4, set5x5 } from '../actions'
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 
@@ -18,8 +18,10 @@ let guid = () => {
 const GameBoard = (props) => {
 
     useEffect(() => {
+
         props.setLettersList(props.boardDice)
-      },[props.boardDice])
+
+    },[props.boardDice])
       
     const sizeClass = () => {
         if(props.boardDiceName === "5 x 5"){
@@ -51,13 +53,33 @@ const GameBoard = (props) => {
                 <Button 
                     variant="contained"
                     color="secondary"
-                    onClick={() => props.setBoardDice()}
+                    // onClick={() => {
+                    //     props.setBoardDice()
+                    //     props.setLettersList(props.boardDice)
+                    // }}
+                    onClick={() => {
+                        if (props.boardDiceName === "4 x 4"){
+
+                            props.set5x5()
+                        }
+                        
+                        else {
+                            props.set4x4()
+                        }
+
+                        props.scrambleLetters(props.boardDice)
+
+                        props.setLettersList(props.boardDice)
+                    }}
                 >Make {props.boardDiceName === "5 x 5" ? "4 x 4": "5 x 5"}</Button>
 
                 <Button 
                     variant="contained"
                     color="secondary"
-                    onClick={() => props.scrambleLetters(props.boardDice)}
+                    onClick={() => {
+                        props.scrambleLetters(props.boardDice)
+                        props.setLettersList(props.boardDice)
+                    }}
                 >Scramble Dice</Button>
             </div>
         </div>
@@ -70,10 +92,12 @@ const mapStateToProps = state => {
 
         lettersList: state.lettersList,
         boardDice: state.boardDice,
-        boardDiceName: state.boardDiceName
+        boardDiceName: state.boardDiceName,
+        showPauseGameModal: state.showPauseGameModal,
+        isCounting: state.isCounting
 
     })
 
 };
 
-export default connect(mapStateToProps, {scrambleLetters, setLettersList, setBoardDice})(GameBoard);
+export default connect(mapStateToProps, {scrambleLetters, setLettersList, setBoardDice, set4x4, set5x5})(GameBoard);
