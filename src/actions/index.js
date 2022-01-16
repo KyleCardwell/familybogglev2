@@ -1,5 +1,5 @@
 export const SET_BOARD_DICE = "SET_BOARD_DICE"
-export const SET_LETTERS_LIST = "SET_DICE_LIST"
+export const SET_LETTERS_LIST = "SET_LETTERS_LIST"
 export const SCRAMBLE_LETTERS = "SCRAMBLE_LETTERS"
 export const START_COUNT = "START_COUNT"
 export const RESET_TIME = "RESET_TIME"
@@ -10,13 +10,23 @@ export const TIMER_COUNT_DOWN = "TIMER_COUNT_DOWN"
 export const SET_TIME_BTN = "SET_TIME_BTN"
 export const START_GAME = "START_GAME"
 export const SET_SHOW_NEW_GAME_MODAL = "SET_SHOW_NEW_GAME_MODAL"
+export const SET_SHOW_PAUSE_GAME_MODAL = "SET_SHOW_PAUSE_GAME_MODAL"
 export const SET_INITIAL_TIME = "SET_INITIAL_TIME"
 export const SET_IS_COUNTING = "SET_IS_COUNTING"
+export const SET_4X4 = "SET_4X4"
+export const SET_5X5 = "SET_5X5"
 
 export const setBoardDice = (array) => {
     return ({type: SET_BOARD_DICE, payload: array})
 }
 
+export const set4x4 = () => {
+    return({type: SET_4X4})
+}
+
+export const set5x5 = () => {
+    return({type: SET_5X5})
+}
 export const setLettersList = (array) => {
     return ({type: SET_LETTERS_LIST, payload: array})
 }
@@ -54,7 +64,11 @@ export const startGame = () => {
 }
 
 export const setShowNewGameModal = () => {
-        return ({type: SET_SHOW_NEW_GAME_MODAL})
+    return ({type: SET_SHOW_NEW_GAME_MODAL})
+}
+
+export const setShowPauseGameModal = () => {
+    return ({type: SET_SHOW_PAUSE_GAME_MODAL})
 }
 
 export const setInitialTime = (newTime) => {

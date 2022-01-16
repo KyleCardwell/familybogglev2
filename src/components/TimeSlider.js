@@ -53,7 +53,7 @@ function TimeSlider(props) {
           />
         </Grid>
         <Grid item>
-          <Input
+          {/* <Input
           // Math.floor(props.seconds/60)}:${props.seconds % 60 > 9 ? props.seconds % 60 : "0" + props.seconds % 60
             value={value}
             size="small"
@@ -66,7 +66,8 @@ function TimeSlider(props) {
               type: 'number',
               'aria-labelledby': 'input-slider',
             }}
-          />
+          /> */}
+          <p>{Math.floor(props.seconds/60)}:{props.seconds % 60 > 9 ? props.seconds % 60 : "0" + props.seconds % 60}</p>
         </Grid>
       </Grid>
     </Box>
@@ -76,6 +77,7 @@ function TimeSlider(props) {
 const mapStateToProps = state => {
   return {
     initialTime: state.initialTime,
+    seconds: state.remaining
   }
 }
 

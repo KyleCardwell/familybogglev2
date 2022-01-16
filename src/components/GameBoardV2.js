@@ -51,7 +51,7 @@ const GameBoard = (props) => {
                 <Button 
                     variant="contained"
                     color="secondary"
-                    onClick={() => props.setBoardDice(props.boardDice)}
+                    onClick={() => props.setBoardDice()}
                 >Make {props.boardDiceName === "5 x 5" ? "4 x 4": "5 x 5"}</Button>
 
                 <Button 
