@@ -8,11 +8,10 @@ import { setLettersList } from './actions';
 import Timer from './components/Timer';
 import NewGameModal from './components/NewGameModal';
 import Square from './components/Square';
+import PauseGameModal from './components/PauseGameModal';
 
 const App = (props) => {
 
-  // console.log(props.lettersList)
-  // console.log(setLettersList((props.boardDice)))
   
   useEffect(() => {
     props.setLettersList(props.boardDice)
@@ -23,8 +22,11 @@ const App = (props) => {
 
       <Grid className="App-header">
         
-        {props.showNewGameModal ? <NewGameModal /> : <div>
-          <Timer /> <GameBoardV2 />
+        {props.showNewGameModal ? <NewGameModal />
+        : props.showPauseGameModal ? <PauseGameModal />
+        : <div>
+            <Timer />
+            <GameBoardV2 />
           </div>
         }
 
@@ -38,7 +40,8 @@ const mapStateToProps = state => {
   return({
     lettersList: state.lettersList,
     boardDice: state.boardDice,
-    showNewGameModal: state.showNewGameModal
+    showNewGameModal: state.showNewGameModal,
+    showPauseGameModal: state.showPauseGameModal
 
   })
 }

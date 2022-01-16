@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ToggleButtton from '@mui/material/ToggleButton'
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup'
 import { connect } from "react-redux";
-import { setBoardDice } from '../actions'
+import { setBoardDice, set4x4, set5x5, setLettersList } from '../actions'
 
 function ToggleSize(props) {
     const [gameBoardSize, setGameBoardSize ] = useState('right');
@@ -13,6 +13,10 @@ function ToggleSize(props) {
         }
     }
 
+    useEffect(() => {
+        props.setLettersList(props.boardDice)
+      },[props.boardDice])
+
     return (
         <ToggleButtonGroup
             value={gameBoardSize}
@@ -22,15 +26,27 @@ function ToggleSize(props) {
         >
             <ToggleButtton
                 value="left" aria-label="4x4"
-                onClick={() => {props.setBoardDice()}}
-            >4 x 4</ToggleButtton>
+                onClick={() => {
+                    props.set4x4()
+
+                }}
+                >4 x 4</ToggleButtton>
             <ToggleButtton
                 value="right" aria-label="5x5"
-                onClick={() => {props.setBoardDice()}}
+                onClick={() => {
+                    props.set5x5()
+          
+                }}
             >5 x 5</ToggleButtton>
         
         </ToggleButtonGroup>
     )
 }
 
-export default connect(null, {setBoardDice})(ToggleSize);
+const mapStateToProps = (state) => {
+    return({
+        boardDice: state.boardDice,
+    })
+}
+
+export default connect(mapStateToProps, {setBoardDice, set4x4, set5x5, setLettersList})(ToggleSize);

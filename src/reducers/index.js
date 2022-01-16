@@ -1,4 +1,4 @@
-import { SET_BOARD_DICE, SET_LETTERS_LIST, SCRAMBLE_LETTERS, START_COUNT, SET_TIME_REMAINING, RESET_TIME, SET_TIME_IS_UP, TIMER_COUNT_DOWN, TIMER_COUNT_UP, SET_TIME_BTN, START_GAME, SET_SHOW_NEW_GAME_MODAL, SET_INITIAL_TIME, SET_IS_COUNTING } from "../actions";
+import { SET_BOARD_DICE, SET_LETTERS_LIST, SCRAMBLE_LETTERS, START_COUNT, SET_TIME_REMAINING, RESET_TIME, SET_TIME_IS_UP, TIMER_COUNT_DOWN, TIMER_COUNT_UP, SET_TIME_BTN, START_GAME, SET_SHOW_NEW_GAME_MODAL, SET_INITIAL_TIME, SET_IS_COUNTING, SET_4X4, SET_5X5, SET_SHOW_PAUSE_GAME_MODAL } from "../actions";
 import { dice4by4, dice5by5 } from '../components/dicedata'
 
 
@@ -14,6 +14,7 @@ export const initialState = {
     boardDiceName: "5 x 5",
     setTime: false,
     showNewGameModal: true,
+    showPauseGameModal: false,
     gameIsStarting: false
 
 }
@@ -61,6 +62,21 @@ export const reducer = (state = initialState, action) => {
                 boardDice: dice4by4,
                 boardDiceName: "4 x 4"
             })
+
+        case(SET_4X4):
+            return({
+                ...state,
+                boardDice: dice4by4,
+                boardDiceName: "4 x 4"
+            })
+
+        case(SET_5X5):
+            return({
+                ...state,
+                boardDice: dice5by5,
+                boardDiceName: "5 x 5"
+            })
+
         case (SET_LETTERS_LIST):
 
             const useLetters = chooseLetters(action.payload)
@@ -139,13 +155,23 @@ export const reducer = (state = initialState, action) => {
         case (START_GAME):
             return({
                 ...state,
-                gameIsStarting: !state.gameIsStarting
+                gameIsStarting: !state.gameIsStarting,
+                showPauseGameModal: false
             })   
         case (SET_SHOW_NEW_GAME_MODAL):
             return({
                 ...state,
                 showNewGameModal: !state.showNewGameModal
             })
+
+        case (SET_SHOW_PAUSE_GAME_MODAL):
+            console.log("hello now")
+            return({
+                ...state,
+                showPauseGameModal: !state.showPauseGameModal,
+                isCounting: !state.isCounting
+            })
+
         case (SET_IS_COUNTING):
 
             if(action.payload === undefined){
