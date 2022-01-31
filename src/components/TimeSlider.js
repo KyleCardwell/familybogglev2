@@ -47,7 +47,7 @@ function TimeSlider(props) {
             value={typeof value === 'number' ? value : 0}
             onChange={handleSliderChange}
             aria-labelledby="input-slider"
-            min={10}
+            min={3}
             max={600}
             step={10}
           />

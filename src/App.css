@@ -15,11 +15,27 @@
 }
 
 
-/* .gameContainer {
+.gameContainer {
   width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
-.gameBoard {
+.wordsBox {
+  flex-grow: 2;
+  height: 100vh;
+}
+
+.allWords {
+  font-size: x-large;
+  height: 90%;
+  overflow: hidden;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  width: 33%;
+}
+
+/* .gameBoard {
   max-width: fit-content;
   display: flex;
   flex-wrap: wrap;
