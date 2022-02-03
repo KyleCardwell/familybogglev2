@@ -50,7 +50,7 @@ const GameBoard = (props) => {
             </section>
             <div className="board-buttons">
 
-                <Button 
+                {/* <Button 
                     variant="contained"
                     color="secondary"
                     // onClick={() => {
@@ -80,7 +80,7 @@ const GameBoard = (props) => {
                         props.scrambleLetters(props.boardDice)
                         props.setLettersList(props.boardDice)
                     }}
-                >Scramble Dice</Button>
+                >Scramble Dice</Button> */}
             </div>
         </div>
 
