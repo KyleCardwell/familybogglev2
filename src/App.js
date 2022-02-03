@@ -7,9 +7,8 @@ import { connect } from 'react-redux';
 import { setLettersList } from './actions';
 import Timer from './components/Timer';
 import NewGameModal from './components/NewGameModal';
-import Square from './components/Square';
 import PauseGameModal from './components/PauseGameModal';
-import PossibleWords from './components/PossibleWords';
+import PossibleWordsContainer from './components/PossibleWordsContainer';
 
 const App = (props) => {
 
@@ -32,7 +31,7 @@ const App = (props) => {
               <GameBoardV2 />
             </div>
             <div className='wordsBox'>
-              <PossibleWords />
+              <PossibleWordsContainer />
             </div>
           </div>
         }

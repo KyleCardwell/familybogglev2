@@ -1,3 +1,4 @@
+import { WorkSharp } from "@mui/icons-material";
 import axios from "axios";
 import {
   SET_BOARD_DICE,
@@ -93,31 +94,19 @@ export const reducer = (state = initialState, action) => {
     case SET_LETTERS_LIST:
       const useLetters = chooseLetters(action.payload);
 
-      const allWords = {};
+      let wordsInfo = {};
 
       console.log("hello all words")
 
       axios
-        .post("https://family-boggle-db.herokuapp.com/api/boggleLetters", {
+        // .post("https://family-boggle-db.herokuapp.com/api/boggleLetters", {
+        .post("http://localhost:3333/api/boggleLetters", {
           lettersList: useLetters.join("")
         })
         .then((res) => {
-          allWords.totalWords = res.data.wordsFound.totalWords;
-          allWords.letters3 = res.data.wordsFound.letters3
-          allWords.letters4 = res.data.wordsFound.letters4
-          allWords.letters5 = res.data.wordsFound.letters5
-          allWords.letters6 = res.data.wordsFound.letters6
-          allWords.letters7 = res.data.wordsFound.letters7
-          allWords.letters8 = res.data.wordsFound.letters8
-          allWords.letters9 = res.data.wordsFound.letters9
-          allWords.letters10 = res.data.wordsFound.letters10
-          allWords.letters11 = res.data.wordsFound.letters11
-          allWords.letters12 = res.data.wordsFound.letters12
-          allWords.letters13 = res.data.wordsFound.letters13
-          allWords.letters14 = res.data.wordsFound.letters14
-          allWords.letters15 = res.data.wordsFound.letters15
-          allWords.lettersList = res.data.wordsFound.lettersList
-          console.log("all words", allWords)
+          wordsInfo = res.data.wordsInfo
+
+          console.log("all words", res.data)
         })
         .catch((err) => {
           console.log(err);
@@ -126,7 +115,7 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         lettersList: useLetters,
-        wordsFound: allWords,
+        wordsInfo: wordsInfo,
       };
 
     case SCRAMBLE_LETTERS:

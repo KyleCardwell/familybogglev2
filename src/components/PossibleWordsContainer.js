@@ -5,7 +5,7 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 
-const PossibleWords = (props) => {
+const PossibleWordsContainer = (props) => {
 
     return (
         <div className='possibleWords'>
@@ -45,4 +45,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(PossibleWords);
+export default connect(mapStateToProps)(PossibleWordsContainer);
