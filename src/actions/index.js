@@ -15,6 +15,7 @@ export const SET_INITIAL_TIME = "SET_INITIAL_TIME"
 export const SET_IS_COUNTING = "SET_IS_COUNTING"
 export const SET_4X4 = "SET_4X4"
 export const SET_5X5 = "SET_5X5"
+export const SET_WORDS_INFO = "SET_WORDS_INFO"
 
 export const setBoardDice = (array) => {
     return ({type: SET_BOARD_DICE, payload: array})
@@ -79,4 +80,6 @@ export const setIsCounting = (value) => {
     return ({type: SET_IS_COUNTING, payload: value})
 }
 
-
+export const setWordsInfo = (words) => {
+    return ({type: SET_WORDS_INFO, payload: words})
+}

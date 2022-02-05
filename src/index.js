@@ -10,9 +10,10 @@ import { applyMiddleware, createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { reducer } from './reducers';
 import logger from 'redux-logger'
+import thunk from 'redux-thunk';
 // import { createMuiTheme } from '@material-ui/core';
 
-const store = createStore(reducer, applyMiddleware(logger))
+const store = createStore(reducer, applyMiddleware(thunk, logger))
 
 const theme = createTheme();
 

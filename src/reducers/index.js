@@ -1,5 +1,3 @@
-import { WorkSharp } from "@mui/icons-material";
-import axios from "axios";
 import {
   SET_BOARD_DICE,
   SET_LETTERS_LIST,
@@ -18,6 +16,7 @@ import {
   SET_4X4,
   SET_5X5,
   SET_SHOW_PAUSE_GAME_MODAL,
+  SET_WORDS_INFO,
 } from "../actions";
 import { dice4by4, dice5by5 } from "../components/dicedata";
 
@@ -33,7 +32,7 @@ export const initialState = {
   showNewGameModal: true,
   showPauseGameModal: false,
   gameIsStarting: false,
-  wordsFound: {},
+  wordsInfo: {},
 };
 
 const lettersListScramble = (array) => {
@@ -62,20 +61,6 @@ const chooseLetters = (diceArray) => {
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
-    // case (SET_BOARD_DICE):
-    //     if (state.boardDiceName === "4 x 4") {
-
-    //         return ({
-    //             ...state,
-    //             boardDice: dice5by5,
-    //             boardDiceName: "5 x 5"
-    //         })
-    //     } else
-    //     return ({
-    //         ...state,
-    //         boardDice: dice4by4,
-    //         boardDiceName: "4 x 4"
-    //     })
 
     case SET_4X4:
       return {
@@ -94,29 +79,17 @@ export const reducer = (state = initialState, action) => {
     case SET_LETTERS_LIST:
       const useLetters = chooseLetters(action.payload);
 
-      let wordsInfo = {};
+      return {
+        ...state,
+        lettersList: useLetters
+      };
 
-      console.log("hello all words")
-
-      axios
-        // .post("https://family-boggle-db.herokuapp.com/api/boggleLetters", {
-        .post("http://localhost:3333/api/boggleLetters", {
-          lettersList: useLetters.join("")
-        })
-        .then((res) => {
-          wordsInfo = res.data.wordsInfo
-
-          console.log("all words", res.data)
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+    case SET_WORDS_INFO:
 
       return {
         ...state,
-        lettersList: useLetters,
-        wordsInfo: wordsInfo,
-      };
+        wordsInfo: action.payload
+      }
 
     case SCRAMBLE_LETTERS:
       const rescrambleLetters = chooseLetters(action.payload);

@@ -1,9 +1,10 @@
 import React, { useEffect }from 'react';
 import { connect } from 'react-redux';
 import DiceV2 from './DiceV2';
-import { scrambleLetters, setLettersList, setBoardDice, set4x4, set5x5 } from '../actions'
+import { scrambleLetters, setLettersList, setBoardDice, set4x4, set5x5, setWordsInfo } from '../actions'
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
+import axios from 'axios';
 
 let guid = () => {
     let s4 = () => {
@@ -22,6 +23,22 @@ const GameBoard = (props) => {
         props.setLettersList(props.boardDice)
 
     },[props.boardDice])
+
+    useEffect(() => {
+        axios
+        // .post("https://family-boggle-db.herokuapp.com/api/boggleLetters", {
+        .post("http://localhost:3333/api/boggleLetters", {
+          // combine letters array into one string
+          lettersList: props.lettersList.join("")
+        })
+        .then((res) => {
+          props.setWordsInfo(res.data.wordsInfo)
+        })
+        .catch((err) => {
+          console.log(err);
+          return err
+        });
+    }, [props.lettersList])
       
     const sizeClass = () => {
         if(props.boardDiceName === "5 x 5"){
@@ -100,4 +117,4 @@ const mapStateToProps = state => {
 
 };
 
-export default connect(mapStateToProps, {scrambleLetters, setLettersList, setBoardDice, set4x4, set5x5})(GameBoard);
+export default connect(mapStateToProps, {scrambleLetters, setLettersList, setBoardDice, set4x4, set5x5, setWordsInfo})(GameBoard);
