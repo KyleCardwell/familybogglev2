@@ -26,8 +26,9 @@ const GameBoard = (props) => {
 
     useEffect(() => {
         axios
-        // .post("https://family-boggle-db.herokuapp.com/api/boggleLetters", {
-        .post("http://localhost:3333/api/boggleLetters", {
+        .post("https://family-boggle-db.herokuapp.com/api/boggleLetters", {
+        // .post("http://localhost:3333/api/boggleLetters", {
+            
           // combine letters array into one string
           lettersList: props.lettersList.join("")
         })

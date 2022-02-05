@@ -13,7 +13,7 @@ function WordList(props) {
           sm: 2,
           md: 3,
           display: "flex",
-          "flex-direction": "column",
+          "flexDirection": "column",
         }}
       >
         <h2 sx={{ width: "100%" }}>{props.number}-Letter Words</h2>
