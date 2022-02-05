@@ -7,8 +7,8 @@ import { connect } from 'react-redux';
 import { setLettersList } from './actions';
 import Timer from './components/Timer';
 import NewGameModal from './components/NewGameModal';
-import Square from './components/Square';
 import PauseGameModal from './components/PauseGameModal';
+import PossibleWordsContainer from './components/PossibleWordsContainer';
 
 const App = (props) => {
 
@@ -24,9 +24,15 @@ const App = (props) => {
         
         {props.showNewGameModal ? <NewGameModal />
         // : props.showPauseGameModal ? <PauseGameModal />
-        : <div>
-            <Timer />
-            <GameBoardV2 />
+        : <div className='gameContainer'>
+            <div className='wordsBox'></div>
+            <div className='gameBox'>
+              <Timer />
+              <GameBoardV2 />
+            </div>
+            <div className='wordsBox'>
+              <PossibleWordsContainer />
+            </div>
           </div>
         }
         {props.showPauseGameModal ? <PauseGameModal /> : "" }
@@ -42,7 +48,8 @@ const mapStateToProps = state => {
     lettersList: state.lettersList,
     boardDice: state.boardDice,
     showNewGameModal: state.showNewGameModal,
-    showPauseGameModal: state.showPauseGameModal
+    showPauseGameModal: state.showPauseGameModal,
+    timeIsUp: state.timeIsUp
 
   })
 }

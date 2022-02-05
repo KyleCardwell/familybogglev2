@@ -38,8 +38,8 @@ export const dice5by5 = [
     ['E', 'I', 'L', 'P', 'S', 'T'],
     ['E', 'M', 'O', 'T', 'T', 'T'],
     ['E', 'N', 'S', 'S', 'S', 'U'],
-    ['Qu', 'In', 'Th', 'Er', 'He', 'An'],
-    // ['F', 'I', 'P', 'R', 'S', 'Y'], alternate for line above
+    // ['Qu', 'In', 'Th', 'Er', 'He', 'An'], //alternate for line below
+    ['F', 'I', 'P', 'R', 'S', 'Y'], //alternate for line above
     ['G', 'O', 'R', 'R', 'V', 'W'],
     ['I', 'P', 'R', 'S', 'Y', 'Y'],
     ['N', 'O', 'O', 'T', 'U', 'W'],
