@@ -11,16 +11,21 @@ const PossibleWordsContainer = (props) => {
     return (
         <div className='possibleWords'>
             <h3>Possible Words {props.wordsInfo.totalWords}</h3>
+
+                {props.wordsInfo.totalWords != null ? 
+
                 <Box className="returnedWords">
 
-                    {/* {props.wordsInfo.wordsFound.map(group => {
+                    {props.wordsInfo.wordsFound.map(group => {
                         if (group.length > 1) {
 
-                            return <WordList 
+                            return <WordList
+                                key={group[0]}
                                 number={group[0]}
+                                group={group.slice(1, group.length).sort()}
                             />
                         }
-                    })} */}
+                    })}
                     
                     {/* <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3, display: 'flex', 'flex-direction': 'column'}}>
                         <h2 sx={{width: '100%'}}>{props.wordsInfo.wordsFound[0][0]}-Letter Words</h2>
@@ -43,7 +48,7 @@ const PossibleWordsContainer = (props) => {
                         </div>
                     </Grid> */}
 
-                </Box>
+                </Box> : "" }
         </div>
     )
 }

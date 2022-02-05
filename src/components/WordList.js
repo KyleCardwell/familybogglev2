@@ -1,10 +1,10 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
+import { connect } from "react-redux";
 
 function WordList(props) {
   return (
     <div>
-
       <Grid
         container
         rowSpacing={1}
@@ -19,7 +19,7 @@ function WordList(props) {
         <h2 sx={{ width: "100%" }}>{props.number}-Letter Words</h2>
         <div className="wordList">
           {props.timeIsUp
-            ? props.wordsFound.letters3.sort().map((word) => {
+            ? props.group.map((word) => {
                 return (
                   <p key={word} className="word">
                     {word}
@@ -33,4 +33,11 @@ function WordList(props) {
   );
 }
 
-export default WordList;
+const mapStateToProps = state => {
+  return {
+    wordsFound: state.wordsInfo.wordsFound,
+    timeIsUp: state.timeIsUp
+  }
+}
+
+export default connect(mapStateToProps)(WordList);
