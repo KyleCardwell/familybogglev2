@@ -23,23 +23,6 @@ const GameBoard = (props) => {
         props.setLettersList(props.boardDice)
 
     },[props.boardDice])
-
-    useEffect(() => {
-        axios
-        .post("https://family-boggle-db.herokuapp.com/api/boggleLetters", {
-        // .post("http://localhost:3333/api/boggleLetters", {
-            
-          // combine letters array into one string
-          lettersList: props.lettersList.join("")
-        })
-        .then((res) => {
-          props.setWordsInfo(res.data.wordsInfo)
-        })
-        .catch((err) => {
-          console.log(err);
-          return err
-        });
-    }, [props.lettersList])
       
     const sizeClass = () => {
         if(props.boardDiceName === "5 x 5"){
@@ -49,10 +32,18 @@ const GameBoard = (props) => {
         }
     }
 
-    return (
-        <div className="gameboardLarge">
+    const timeIsUpClass = () => {
+        if(props.timeIsUp === false) {
+            return ""
+        } else {
+            return "timeDone"
+        }
+    }
 
-            <section className="squareContainer">
+    return (
+        <div className={`gameboardLarge`}>
+
+            <section className={`squareContainer ${timeIsUpClass()}`}>
 
                 <div className={`${sizeClass()}`}>
                         {props.lettersList.map(letter => {
@@ -66,9 +57,9 @@ const GameBoard = (props) => {
                 </div>
 
             </section>
-            <div className="board-buttons">
+            {/* <div className="board-buttons">
 
-                {/* <Button 
+                <Button 
                     variant="contained"
                     color="secondary"
                     // onClick={() => {
@@ -98,8 +89,8 @@ const GameBoard = (props) => {
                         props.scrambleLetters(props.boardDice)
                         props.setLettersList(props.boardDice)
                     }}
-                >Scramble Dice</Button> */}
-            </div>
+                >Scramble Dice</Button>
+            </div> */}
         </div>
 
     )
@@ -112,7 +103,8 @@ const mapStateToProps = state => {
         boardDice: state.boardDice,
         boardDiceName: state.boardDiceName,
         showPauseGameModal: state.showPauseGameModal,
-        isCounting: state.isCounting
+        isCounting: state.isCounting,
+        timeIsUp: state.timeIsUp
 
     })
 
