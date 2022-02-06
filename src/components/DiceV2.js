@@ -29,7 +29,7 @@ function Dice(props) {
     }
 
         return (
-            <div className={`square ${timeIsUpClass()}`}>
+            <div className={`square`}>
 
                 <div className={`content  ${pausedGameClass()}`}>{props.letter}</div>
 
